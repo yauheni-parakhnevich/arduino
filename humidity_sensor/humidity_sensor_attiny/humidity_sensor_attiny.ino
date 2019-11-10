@@ -1,7 +1,7 @@
 #include <TM1637Display.h>
 #include <DHT.h>
 
-#define DHT_PIN 4
+#define DHT_PIN 0
 #define DHT_TYPE DHT22
 
 DHT dht(DHT_PIN, DHT_TYPE);
@@ -10,7 +10,7 @@ float hum;  //Stores humidity value
 float temp; //Stores temperature value
 
 #define CLK 1
-#define DIO 0
+#define DIO 2
 
 TM1637Display display(CLK, DIO);
 
