@@ -4,6 +4,7 @@
 #define LED_PIN     4
 #define NUM_LEDS    9 // Set to # of leds
 #define GROUP_SIZE  NUM_LEDS / 3
+#define DELAY       1500
 
 #define OFF         CRGB(0, 0, 0)
 #define RED         CRGB(255, 0, 0)
@@ -32,6 +33,13 @@ void setColor(int group[], CRGB color) {
   }
 }
 
+void showColorSet(CRGB color1, CRGB color2, CRGB color3) {
+    setColor(groupOneLeds, color1);
+    setColor(groupTwoLeds, color2);
+    setColor(groupThreeLeds, color3);
+    FastLED.show();
+    delay(DELAY);  
+}
 
 void loop() {
  // read button state
@@ -44,41 +52,13 @@ void loop() {
     }
     
  if(buttonState == 1) { //red team
-    setColor(groupOneLeds, RED);
-    setColor(groupTwoLeds, OFF);
-    setColor(groupThreeLeds, YELLOW);
-    FastLED.show();
-    delay(1500);  
-  
-    setColor(groupOneLeds, OFF);
-    setColor(groupTwoLeds, GREEN);
-    setColor(groupThreeLeds, YELLOW);
-    FastLED.show();
-    delay(1500);  
-  
-    setColor(groupOneLeds, RED);
-    setColor(groupTwoLeds, GREEN);
-    setColor(groupThreeLeds, OFF);
-    FastLED.show();
-    delay(1500);  
+    showColorSet(RED, OFF, YELLOW);  
+    showColorSet(OFF, GREEN, YELLOW);
+    showColorSet(RED, GREEN, OFF);
  } else { // blue team
-    setColor(groupOneLeds, GREEN);
-    setColor(groupTwoLeds, OFF);
-    setColor(groupThreeLeds, YELLOW);
-    FastLED.show();
-    delay(1500);  
-  
-    setColor(groupOneLeds, GREEN);
-    setColor(groupTwoLeds, BLUE);
-    setColor(groupThreeLeds, OFF);
-    FastLED.show();
-    delay(1500);  
-  
-    setColor(groupOneLeds, OFF);
-    setColor(groupTwoLeds, BLUE);
-    setColor(groupThreeLeds, YELLOW);
-    FastLED.show();
-    delay(1500);    
+    showColorSet(GREEN, OFF, YELLOW);
+    showColorSet(GREEN, BLUE, OFF);
+    showColorSet(OFF, BLUE, YELLOW);
  }
   
 }
